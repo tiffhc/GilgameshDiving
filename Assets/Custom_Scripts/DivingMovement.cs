@@ -33,8 +33,8 @@ public class DivingMovement : MonoBehaviour
             move_down = 0; 
         }
         //get screen width and object width
-        var screenW = background.GetComponent<SpriteRenderer>().bounds.size.x;
-        var objectW = gameObject.GetComponent<BoxCollider2D>().bounds.size.x;
+        float screenW = background.GetComponent<SpriteRenderer>().bounds.size.x;
+        float objectW = gameObject.GetComponent<BoxCollider2D>().bounds.size.x;
         //if player is moving left and hits left border, block movement
         if (move_side < 0)
         {
