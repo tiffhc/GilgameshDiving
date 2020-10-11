@@ -10,6 +10,7 @@ public class DivingMovement : MonoBehaviour
     [SerializeField]
     private float movementspeed = 10;
 
+    public GameObject playerobject;
     public Rigidbody2D rb;
     private float move_side;
     private float move_down;
@@ -27,6 +28,7 @@ public class DivingMovement : MonoBehaviour
         move_side = Input.GetAxis("Horizontal"); // <0 is left, >0 is right 
 
         move_down = Input.GetAxis("Vertical");  // positive is up, negative is down 
+        Debug.Log("move down");
 
         if(move_down >= 0)
         {
@@ -34,7 +36,7 @@ public class DivingMovement : MonoBehaviour
         }
         //get screen width and object width
         float screenW = background.GetComponent<SpriteRenderer>().bounds.size.x;
-        float objectW = gameObject.GetComponent<BoxCollider2D>().bounds.size.x;
+        float objectW = playerobject.gameObject.GetComponent<BoxCollider2D>().bounds.size.x;
         //if player is moving left and hits left border, block movement
         if (move_side < 0)
         {
@@ -58,29 +60,6 @@ public class DivingMovement : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Flower"))
-        {
-            SceneManager.LoadScene("GoodEnding"); 
-        }
-        if(collision.gameObject.CompareTag("Enemy"))
-        {
-            //Debug.Log("hit enemy");
-            //Decrease air bar value
-            for (int i = 0; i < 1000; i++)
-            {
-                //s.value -= Airhp.decreaseRate;
-                s.value = 0;
-            }
-            //if air bar value <=0 -> gameover, assign the collided object as last bounty
-            if (s.value >= 0)
-            {
-                PlayerPrefs.SetString("lastBounty", collision.gameObject.GetComponent<EnemyMovement>().enemy_name);
-                string lastBounty = PlayerPrefs.GetString("lastBounty");
-                Debug.Log(lastBounty);
-            }
-        }
-    }
+  
 
 }
