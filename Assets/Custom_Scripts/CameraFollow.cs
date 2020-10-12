@@ -8,7 +8,7 @@ public class CameraFollow : MonoBehaviour
 
     public Transform player_t;
     public GameObject background;
-    private bool movingCam = true;
+    //private bool movingCam = true;
     void Start()
     {
         

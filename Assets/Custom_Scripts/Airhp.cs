@@ -19,7 +19,7 @@ public class Airhp : MonoBehaviour
     public float depthTier3;
 
     [SerializeField]
-    public static float decreaseRate = 0.0002f; 
+    public static float decreaseRate = 0.00015f; 
     // Start is called before the first frame update
     void Start()
     {

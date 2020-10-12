@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerCollision : MonoBehaviour
 {
     public Slider s;
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,7 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Gilgamesh colliding");
         if (collision.gameObject.CompareTag("Flower"))
         {
             SceneManager.LoadScene("GoodEnding");
@@ -41,6 +43,30 @@ public class PlayerCollision : MonoBehaviour
                 string lastBounty = PlayerPrefs.GetString("lastBounty");
                 Debug.Log(lastBounty);
             }
+        }
+        if (collision.gameObject.CompareTag("Wall_left"))
+        {
+            player.gameObject.GetComponent<DivingMovement>().wall_collidedleft = true;
+            //Debug.Log("collide wall");
+        }
+        else if (collision.gameObject.CompareTag("Wall_right"))
+        {
+            player.gameObject.GetComponent<DivingMovement>().wall_collidedright = true;
+            //Debug.Log("collide wall");
+        } 
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Wall_left"))
+        {
+            player.gameObject.GetComponent<DivingMovement>().wall_collidedleft = false;
+            //Debug.Log("collide wall");
+        }
+        else if (collision.gameObject.CompareTag("Wall_right"))
+        {
+            player.gameObject.GetComponent<DivingMovement>().wall_collidedright = false;
+            //Debug.Log("collide wall");
         }
     }
 }

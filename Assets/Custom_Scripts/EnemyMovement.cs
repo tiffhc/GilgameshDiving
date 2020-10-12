@@ -29,7 +29,7 @@ public class EnemyMovement : MonoBehaviour
         {
             direction = "right";
         }
-        Debug.Log(direction);
+        //Debug.Log(direction);
 
         if (direction == "left")
         {
