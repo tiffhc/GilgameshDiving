@@ -8,11 +8,11 @@ public class DivingMovement : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
-    private float movementspeed = 10;
+    public float movementspeed = 10;
 
     public GameObject playerobject;
     public Rigidbody2D rb;
-    private float move_side;
+    public float move_side;
     private float move_down;
     public Slider s;
     public GameObject background;
