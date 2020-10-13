@@ -18,7 +18,7 @@ public class CameraFollow : MonoBehaviour
     void LateUpdate()
     {
         var cammoveside = - player_t.gameObject.GetComponent<DivingMovement>().move_side;
-        var playerspeed = player_t.gameObject.GetComponent<DivingMovement>().movementspeed;
+        var playerspeed = player_t.gameObject.GetComponent<DivingMovement>().fallingspeed;
         if (cammoveside < 0)
         {
             Debug.Log("cam moving left");

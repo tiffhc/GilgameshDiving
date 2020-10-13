@@ -3643,7 +3643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementspeed: 10
   fallingspeed: 7
-  constant_fall: -5
+  constant_fall: -2
   wall_collidedleft: 0
   wall_collidedright: 0
   playerobject: {fileID: 520026511}
@@ -3679,7 +3679,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -7222,6 +7222,10 @@ PrefabInstance:
       propertyPath: background
       value: 
       objectReference: {fileID: 548104695}
+    - target: {fileID: 7264715362212968025, guid: 0d46efd933d3bc142b0b6b8bd6086224, type: 3}
+      propertyPath: enemy_name
+      value: Evil Salmon
+      objectReference: {fileID: 0}
     - target: {fileID: 7264715362212968036, guid: 0d46efd933d3bc142b0b6b8bd6086224, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.7
@@ -7265,6 +7269,14 @@ PrefabInstance:
     - target: {fileID: 7264715362212968036, guid: 0d46efd933d3bc142b0b6b8bd6086224, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641354471627068220, guid: 0d46efd933d3bc142b0b6b8bd6086224, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641354471627068220, guid: 0d46efd933d3bc142b0b6b8bd6086224, type: 3}
+      propertyPath: m_Constraints
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d46efd933d3bc142b0b6b8bd6086224, type: 3}

@@ -29,7 +29,7 @@ public class PlayerCollision : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            //Debug.Log("hit enemy");
+            ////Debug.Log("hit enemy");
             //Decrease air bar value
             for (int i = 0; i < 1000; i++)
             {
@@ -47,7 +47,7 @@ public class PlayerCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("Wall_left"))
         {
             player.gameObject.GetComponent<DivingMovement>().wall_collidedleft = true;
-            //Debug.Log("collide wall");
+            Debug.Log("collide wall left");
         }
         else if (collision.gameObject.CompareTag("Wall_right"))
         {

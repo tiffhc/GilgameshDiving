@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 7264715362212968036}
   - component: {fileID: 7264715362212968039}
   - component: {fileID: 7264715362212968038}
-  - component: {fileID: 7264715362212968025}
   - component: {fileID: 7264715362212968037}
+  - component: {fileID: 7641354471627068220}
+  - component: {fileID: 7264715362212968025}
   m_Layer: 0
   m_Name: evil_salmon
   m_TagString: Enemy
@@ -104,22 +105,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7264715362212968025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7264715362212968024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d3858699da51074d90126bee5575e50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  direction: 
-  background: {fileID: 0}
-  enemy_name: Evil Salmon
 --- !u!70 &7264715362212968037
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -136,3 +121,40 @@ CapsuleCollider2D:
   m_Offset: {x: -0.94477385, y: -0.3342225}
   m_Size: {x: 15.886372, y: 3.9646416}
   m_Direction: 1
+--- !u!50 &7641354471627068220
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264715362212968024}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &7264715362212968025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264715362212968024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d3858699da51074d90126bee5575e50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  direction: 
+  background: {fileID: 0}
+  enemy_name: Evil Salmon

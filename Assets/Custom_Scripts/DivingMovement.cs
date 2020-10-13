@@ -13,10 +13,10 @@ public class DivingMovement : MonoBehaviour
     public float movementspeed = 10;
 
     [SerializeField]
-    private float fallingspeed = 7;
+    public float fallingspeed = 10;
 
     [SerializeField]
-    private float constant_fall = -5;
+    private float constant_fall = -1;
 
     public bool wall_collidedleft = false;
     public bool wall_collidedright = false;
@@ -28,12 +28,17 @@ public class DivingMovement : MonoBehaviour
     public Slider s;
     public GameObject background;
 
-    private Boolean ismovingUp;
+    private bool ismovingUp = false;
+
+    private bool cooldown = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        PlayerPrefs.SetString("lastBounty", "Nothing");
     }
 
+    private float forceAmount = 5f;
     void Update()
     {
         //check left right input 
@@ -41,59 +46,74 @@ public class DivingMovement : MonoBehaviour
 
         move_down = Input.GetAxis("Vertical");  // positive is up, negative is down
 
-        /*
-        if(move_down >= 0)
-        {
-            move_down = 0; 
-        }
-        */
-
-        if (move_down <= 0)
-        {
-            move_down = 0; //dont allow to move downwards anymore
-        }
+        move_down = -1; // always moving down
 
         if (move_side < 0 && wall_collidedleft == true) {
             move_side = 0;
+            //Debug.Log(wall_collidedleft);
         }
 
         else if (move_side > 0 && wall_collidedright == true)
         {
             move_side = 0;
-            Debug.Log("stop moving right");
         }
 
-        //To fix
 
-        if(move_down >= 0)
+        //if(move_down >= 0)
+        //{
+        //    transform.position += new Vector3(move_side, move_down, 0) * Time.deltaTime * movementspeed; 
+        //}
+
+        //transform.position += new Vector3(move_side, move_down, 0) * Time.deltaTime * movementspeed;
+
+ 
+
+        if (Input.GetKeyDown("up"))
         {
-            transform.position += new Vector3(move_side, move_down, 0) * Time.deltaTime * movementspeed; 
+            if (cooldown == false)
+            {
+                ismovingUp = true;
+                AddForce();
+                Invoke("ResetCooldown", 0.5f); //wait for 0.5 sec to prevent button spamming
+                cooldown = true;
+            }
+        } else
+        
+        if (ismovingUp == false)
+        {
+            transform.position += new Vector3(move_side, constant_fall, 0) * Time.deltaTime * fallingspeed;
+            if (move_side < 0)
+            {
+                Debug.Log(move_side);
+            }
         }
 
-        //transform.position += new Vector3(move_side, constant_fall, 0) * Time.deltaTime * fallingspeed;
+    }
 
-        //get screen width and object width
-        //float screenW = background.GetComponent<SpriteRenderer>().bounds.size.x;
-        //float objectW = playerobject.gameObject.GetComponent<BoxCollider2D>().bounds.size.x;
-        //if player is moving left and hits left border, block movement
-        //if (move_side < 0)
-        //{
-        //    if (transform.position.x <= 0 - screenW / 2 + objectW / 2)
-        //    {
-        //        move_side = 0;
-        //        //Debug.Log("left_boder");
-        //    }
-        //}
-        ////if player is moving right and hits right border, block movement
-        //if (move_side > 0)
-        //{
-        //    if (transform.position.x >= screenW / 2 - objectW / 2)
-        //    {
-        //        move_side = 0;
-        //        //Debug.Log("right_boder");
-        //    }
-        //}
+    void AddForce()
+    {
+        StartCoroutine(FakeAddForceMotion());
+    }
 
+    IEnumerator FakeAddForceMotion()
+    {
+        float i = 0.1f;
+        while (forceAmount > i && forceAmount / i > forceAmount*2)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, forceAmount / i); // !! For X axis positive force
+            i = i + Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+            Debug.Log(forceAmount / i);
+        }
+        rb.velocity = Vector2.zero;
+        yield return null;
+        Debug.Log("something changes");
+        ismovingUp = false;
+    }
+
+    void ResetCooldown()
+    {
+        cooldown = false;
     }
 
 
