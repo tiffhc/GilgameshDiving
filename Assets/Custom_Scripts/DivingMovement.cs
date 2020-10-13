@@ -63,20 +63,14 @@ public class DivingMovement : MonoBehaviour
             Debug.Log("stop moving right");
         }
 
-        //To fix 
+        //To fix
 
-        if ((!(Input.GetKeyDown(KeyCode.W))) || (!(Input.GetKeyDown(KeyCode.UpArrow))))
+        if(move_down >= 0)
         {
-            transform.position += new Vector3(move_side, constant_fall, 0) * Time.deltaTime * fallingspeed;
-        }
-        else if ((Input.GetKeyDown(KeyCode.W))||(Input.GetKeyDown(KeyCode.UpArrow))) //moving up 
-        {
-            Debug.Log("Pressed W or UpArrow"); 
-            transform.position += new Vector3(move_side, move_down, 0) * Time.deltaTime * movementspeed;
+            transform.position += new Vector3(move_side, move_down, 0) * Time.deltaTime * movementspeed; 
         }
 
-        //transform.position += new Vector3(move_side,  constant_fall, 0) * Time.deltaTime * fallingspeed; 
-
+        //transform.position += new Vector3(move_side, constant_fall, 0) * Time.deltaTime * fallingspeed;
 
         //get screen width and object width
         //float screenW = background.GetComponent<SpriteRenderer>().bounds.size.x;
@@ -102,6 +96,6 @@ public class DivingMovement : MonoBehaviour
 
     }
 
-  
+
 
 }
