@@ -1898,6 +1898,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementspeed: 10
+  fallingspeed: 7
+  constant_fall: -5
   wall_collidedleft: 0
   wall_collidedright: 0
   playerobject: {fileID: 520026511}
@@ -3080,7 +3082,7 @@ GameObject:
   - component: {fileID: 1851630240}
   - component: {fileID: 1851630243}
   m_Layer: 0
-  m_Name: flower_placeholder
+  m_Name: Flower
   m_TagString: Flower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

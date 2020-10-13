@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
+using System;
 
 public class DivingMovement : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
     public float movementspeed = 10;
+
+    [SerializeField]
+    private float fallingspeed = 7;
+
+    [SerializeField]
+    private float constant_fall = -5;
+
     public bool wall_collidedleft = false;
     public bool wall_collidedright = false;
 
@@ -19,9 +28,10 @@ public class DivingMovement : MonoBehaviour
     public Slider s;
     public GameObject background;
 
+    private Boolean ismovingUp;
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>(); 
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -29,15 +39,21 @@ public class DivingMovement : MonoBehaviour
         //check left right input 
         move_side = Input.GetAxis("Horizontal"); // <0 is left, >0 is right 
 
-        move_down = Input.GetAxis("Vertical");  // positive is up, negative is down 
-        Debug.Log("move down");
+        move_down = Input.GetAxis("Vertical");  // positive is up, negative is down
 
+        /*
         if(move_down >= 0)
         {
             move_down = 0; 
         }
+        */
 
-        if (move_side <0 && wall_collidedleft == true) {
+        if (move_down <= 0)
+        {
+            move_down = 0; //dont allow to move downwards anymore
+        }
+
+        if (move_side < 0 && wall_collidedleft == true) {
             move_side = 0;
         }
 
@@ -46,6 +62,20 @@ public class DivingMovement : MonoBehaviour
             move_side = 0;
             Debug.Log("stop moving right");
         }
+
+        //To fix 
+
+        if ((!(Input.GetKeyDown(KeyCode.W))) || (!(Input.GetKeyDown(KeyCode.UpArrow))))
+        {
+            transform.position += new Vector3(move_side, constant_fall, 0) * Time.deltaTime * fallingspeed;
+        }
+        else if ((Input.GetKeyDown(KeyCode.W))||(Input.GetKeyDown(KeyCode.UpArrow))) //moving up 
+        {
+            Debug.Log("Pressed W or UpArrow"); 
+            transform.position += new Vector3(move_side, move_down, 0) * Time.deltaTime * movementspeed;
+        }
+
+        //transform.position += new Vector3(move_side,  constant_fall, 0) * Time.deltaTime * fallingspeed; 
 
 
         //get screen width and object width
@@ -69,9 +99,6 @@ public class DivingMovement : MonoBehaviour
         //        //Debug.Log("right_boder");
         //    }
         //}
-
-
-        transform.position += new Vector3(move_side, move_down, 0) * Time.deltaTime * movementspeed;
 
     }
 
