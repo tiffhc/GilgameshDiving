@@ -8,10 +8,14 @@ public class PlayerCollision : MonoBehaviour
 {
     public Slider s;
     public GameObject player;
+
+    public AudioClip gasp; 
+    AudioSource a; 
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        a = GetComponent<AudioSource>(); 
     }
 
     // Update is called once per frame
@@ -22,7 +26,7 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Gilgamesh colliding");
+        //Debug.Log("Gilgamesh colliding");
         if (collision.gameObject.CompareTag("Flower"))
         {
             SceneManager.LoadScene("GoodEnding");
@@ -33,15 +37,18 @@ public class PlayerCollision : MonoBehaviour
             //Decrease air bar value
             for (int i = 0; i < 1000; i++)
             {
-                //s.value -= Airhp.decreaseRate;
-                s.value = 0;
+                s.value -= Airhp.decreaseRate;
+                //s.value = 0;
             }
             //if air bar value <=0 -> gameover, assign the collided object as last bounty
             if (s.value >= 0)
             {
+                //play audio cue
+                a.PlayOneShot(gasp); 
+
                 PlayerPrefs.SetString("lastBounty", collision.gameObject.GetComponent<EnemyMovement>().enemy_name);
                 string lastBounty = PlayerPrefs.GetString("lastBounty");
-                Debug.Log(lastBounty);
+                //Debug.Log(lastBounty);
             }
         }
         if (collision.gameObject.CompareTag("Wall_left"))

@@ -32,10 +32,17 @@ public class DivingMovement : MonoBehaviour
 
     private bool cooldown = false;
 
+    //Platyer sounds
+    public AudioClip gasping;
+    public AudioClip bubbles;
+    public AudioSource A;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         PlayerPrefs.SetString("lastBounty", "Nothing");
+        A = GetComponent<AudioSource>(); 
     }
 
     private float forceAmount = 5f;
@@ -103,11 +110,11 @@ public class DivingMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, forceAmount / i); // !! For X axis positive force
             i = i + Time.deltaTime;
             yield return new WaitForEndOfFrame();
-            Debug.Log(forceAmount / i);
+            //Debug.Log(forceAmount / i);
         }
         rb.velocity = Vector2.zero;
         yield return null;
-        Debug.Log("something changes");
+        //Debug.Log("something changes");
         ismovingUp = false;
     }
 
