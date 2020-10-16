@@ -11,22 +11,13 @@ public class PlayerSoundBox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    private void OnCollisionEnter2D(Collision player)
-    {
-        if(player.gameObject.CompareTag("Enemy"))
-        {
-            Debug.Log("Found enemy");
-            playerSound.clip = gasp;
-            playerSound.Play(); 
-        }
-    }
 }
